@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getOrderStats, getDailyRevenue, getMenuItems } from '../../services/api';
-import StatCard from '../../components/admin/StatCard';
+import StatCard from '../../components/admin/AdminStatCard';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const Overview = ({ settings }) => {
