@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./context/AuthContext";
 import { useLocation } from "react-router-dom";
-import Sidebar from "./components/admin/Sidebar";
+import Sidebar from "./components/admin/sidebar";
 import Navbar from "./components/admin/Navbar";
 import { getSettings } from "./services/api";
 
