@@ -2,7 +2,7 @@ import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { useAuth } from './context/AuthContext';
-import Sidebar from './components/admin/sidebar';
+import Sidebar from './components/admin/Sidebar';
 import Navbar from './components/admin/Navbar';
 import { getSettings } from './services/api';
 
