@@ -185,7 +185,7 @@ const CartDrawer = ({
             onClick={onPlaceOrder}
             // ❌ REMOVED tableNumber dependency
             // disabled={cart.length === 0 || !orderType || placing}
-            disabled={cart.length === 0 || !orderType || isDineInWithoutTable || placing }
+            disabled={cart.length === 0 || !orderType || placing }
             className="w-full btn-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {placing ? "Placing Order..." : "Place Order"}
