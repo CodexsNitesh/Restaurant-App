@@ -8,12 +8,20 @@
     color: #fff8e7;
     min-height: 100vh;
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 500;
+    font-weight: 700;
     text-rendering: optimizeLegibility;
   }
 
   *, *::before, *::after {
     box-sizing: border-box;
+  }
+
+  * {
+    font-weight: 700 !important;
+  }
+
+  h1, h2, h3, h4, h5, h6, p, span, label, button, a, input, textarea, select, table, th, td {
+    font-weight: 700 !important;
   }
 
   a, button, input, select, textarea {
