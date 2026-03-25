@@ -21,6 +21,19 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
   try {
+    const { orderType, tableNumber } = req.body;
+
+    if (!orderType) {
+      return res.status(400).json({ message: 'orderType is required' });
+    }
+    if (orderType === 'dine-in' && !tableNumber) {
+      return res.status(400).json({ message: 'tableNumber is required for dine-in orders' });
+    }
+
+    if (orderType === 'takeaway') {
+      req.body.tableNumber = null; // normalize
+    }
+
     const order = await Order.create(req.body);
     res.status(201).json(order);
   } catch (err) { res.status(400).json({ message: err.message }); }

@@ -9,7 +9,8 @@ const orderItemSchema = new mongoose.Schema({
 
 const orderSchema = new mongoose.Schema({
   orderNumber: { type: String, unique: true },
-  tableNumber: { type: String, required: true },
+  orderType: { type: String, enum: ['dine-in', 'takeaway'], required: true },
+  tableNumber: { type: String },
   items: [orderItemSchema],
   totalAmount: { type: Number, required: true },
   status: {

@@ -102,7 +102,6 @@ const CartDrawer = ({
 
           {orderType === "takeaway" && (
             <div className="text-sm text-gray-600">🛍️ Takeaway Order </div>
-            
           )}
 
           {/* {isDineInWithoutTable && (

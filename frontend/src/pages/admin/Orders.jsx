@@ -67,7 +67,7 @@ const Orders = ({ settings }) => {
         {viewOrder && (
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3 text-sm">
-              <div><p className="text-gray-400">Table</p><p className="font-semibold">{viewOrder.tableNumber}</p></div>
+              <div><p className="text-gray-400">Table</p><p className="font-semibold">{viewOrder.orderType === 'takeaway' ? 'Takeaway' : viewOrder.tableNumber || 'N/A'}</p></div>
               <div><p className="text-gray-400">Status</p><span className={`text-xs px-2 py-1 rounded-full ${statusColor(viewOrder.status)}`}>{viewOrder.status}</span></div>
               <div><p className="text-gray-400">Time</p><p className="font-semibold">{formatDate(viewOrder.createdAt)}</p></div>
               <div><p className="text-gray-400">Total</p><p className="font-semibold text-primary">{formatCurrency(viewOrder.totalAmount, currency)}</p></div>
