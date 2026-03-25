@@ -16,7 +16,7 @@ const CartDrawer = ({
 
   if (!open) return null;
 
-  // const isDineInWithoutTable = orderType === "dine-in" && !tableNumber;
+  const isDineInWithoutTable = orderType === "dine-in" && !tableNumber;
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
@@ -104,18 +104,18 @@ const CartDrawer = ({
             <div className="text-sm text-gray-600">🛍️ Takeaway Order </div>
           )}
 
-          {/* {isDineInWithoutTable && (
+          {isDineInWithoutTable && (
             <div className="text-sm text-red-500">
               ⚠️ Please scan the QR on your table to place a dine-in order
             </div>
-          )} */}
+          )}
 
           {/* Button */}
           <button
             onClick={onPlaceOrder}
             // ❌ REMOVED tableNumber dependency
-            disabled={cart.length === 0 || !orderType || placing}
-            // disabled={cart.length === 0 || !orderType || isDineInWithoutTable || placing }
+            // disabled={cart.length === 0 || !orderType || placing}
+            disabled={cart.length === 0 || !orderType || isDineInWithoutTable || placing }
             className="w-full btn-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {placing ? "Placing Order..." : "Place Order"}
