@@ -10,14 +10,26 @@ const links = [
   { to: '/admin/settings', label: 'Settings', icon: '⚙️' },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const { logout } = useAuth();
   return (
-    <aside className="w-64 bg-dark min-h-screen flex flex-col text-white">
-      <div className="p-6 border-b border-white/10">
-        <h1 className="text-xl font-bold text-primary">🍴 RestaurantOS</h1>
-        <p className="text-xs text-gray-400 mt-1">Admin Dashboard</p>
-      </div>
+    <>
+      <div
+        className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 sm:hidden ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        onClick={onClose}
+      />
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-secondary text-amber-100 flex flex-col overflow-y-auto transform transition-transform duration-300 sm:relative sm:translate-x-0 sm:top-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+      >
+        <div className="p-6 border-b border-amber-300/20 flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-primary">🍴 RestaurantOS</h1>
+            <p className="text-xs text-amber-200 mt-1">Admin Dashboard</p>
+          </div>
+          <button className="sm:hidden text-amber-200 hover:text-white" onClick={onClose}>
+            ✕
+          </button>
+        </div>
       <nav className="flex-1 p-4 space-y-1">
         {links.map((l) => (
           <NavLink
@@ -33,13 +45,14 @@ const Sidebar = () => {
           </NavLink>
         ))}
       </nav>
-      <div className="p-4 border-t border-white/10">
-        <button onClick={logout} className="w-full text-left text-sm text-gray-400 hover:text-white px-4 py-2 rounded-lg hover:bg-white/10 transition">
+      <div className="p-4 border-t border-amber-300/20">
+        <button onClick={logout} className="w-full text-left text-sm text-amber-100 hover:text-white px-4 py-2 rounded-lg hover:bg-amber-200/20 transition">
           🚪 Logout
         </button>
       </div>
     </aside>
-  );
+  </>
+);
 };
 
 export default Sidebar;

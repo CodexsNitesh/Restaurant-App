@@ -21,6 +21,8 @@ import OrderSuccess from "./pages/menu/OrderSuccess";
 // Admin layout with sidebar
 const AdminLayout = ({ settings, setSettings }) => {
   const { isAuth } = useAuth();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   if (!isAuth) return <Navigate to="/admin/login" />;
 
   const pageTitles = {
@@ -36,12 +38,14 @@ const AdminLayout = ({ settings, setSettings }) => {
   const title = pageTitles[location.pathname] || "Dashboard";
 
   return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
-        <Navbar title={title} />
-        <main className="flex-1 p-6 overflow-y-auto bg-gray-50">
-          <Outlet context={{ settings, setSettings }} />
+    <div className="flex min-h-screen bg-[#0f0a05] text-amber-100">
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <Navbar title={title} onMenuClick={() => setSidebarOpen((prev) => !prev)} />
+        <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
+          <div className="max-w-full mx-auto sm:max-w-6xl">
+            <Outlet context={{ settings, setSettings }} />
+          </div>
         </main>
       </div>
     </div>
