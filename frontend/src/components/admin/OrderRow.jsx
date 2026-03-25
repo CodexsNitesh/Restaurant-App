@@ -1,11 +1,11 @@
 import { statusColor, formatCurrency, formatDate } from '../../utils/helpers';
 
 const OrderRow = ({ order, onView, onStatusChange, currency }) => (
-  <tr className="border-b hover:bg-gray-50 transition">
-    <td className="px-4 py-3 font-mono text-sm font-semibold text-primary">{order.orderNumber}</td>
-    <td className="px-4 py-3 text-sm">{order.orderType === 'takeaway' ? 'Takeaway' : `Table ${order.tableNumber || 'N/A'}`}</td>
-    <td className="px-4 py-3 text-sm">{order.items.length} item(s)</td>
-    <td className="px-4 py-3 text-sm font-semibold">{formatCurrency(order.totalAmount, currency)}</td>
+  <tr className="border-b border-amber-200/20 hover:bg-[#2a1f15] transition text-amber-100">
+    <td className="px-4 py-3 font-mono text-sm font-bold text-amber-100">{order.orderNumber}</td>
+    <td className="px-4 py-3 text-sm font-semibold">{order.orderType === 'takeaway' ? 'Takeaway' : `Table ${order.tableNumber || 'N/A'}`}</td>
+    <td className="px-4 py-3 text-sm font-semibold">{order.items.length} item(s)</td>
+    <td className="px-4 py-3 text-sm font-bold text-amber-50">{formatCurrency(order.totalAmount, currency)}</td>
     <td className="px-4 py-3">
       <select
         value={order.status}

@@ -29,20 +29,20 @@ const Orders = ({ settings }) => {
   return (
     <div>
       <div className="flex flex-wrap gap-3 mb-6">
-        <input className="input w-36" placeholder="🔍 Order #" value={search} onChange={(e) => setSearch(e.target.value)} />
-        <select className="input w-36" value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+        <input className="input w-36 bg-[#1f1710] text-amber-100 border-amber-200/50" placeholder="🔍 Order #" value={search} onChange={(e) => setSearch(e.target.value)} />
+        <select className="input w-36 bg-[#1f1710] text-amber-100 border-amber-200/50" value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
           <option value="">All Status</option>
           {['Pending','Preparing','Served','Paid','Cancelled'].map((s) => <option key={s} value={s}>{s}</option>)}
         </select>
-        <input className="input w-36" placeholder="Table #" value={filterTable} onChange={(e) => setFilterTable(e.target.value)} />
+        <input className="input w-36 bg-[#1f1710] text-amber-100 border-amber-200/50" placeholder="Table #" value={filterTable} onChange={(e) => setFilterTable(e.target.value)} />
       </div>
 
       {orders?.length === 0 ? (
         <div className="card text-center py-12 text-gray-400"><p className="text-4xl mb-2">🧾</p><p>No orders found</p></div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full text-sm bg-white rounded-xl shadow-sm border">
-            <thead className="bg-gray-50 text-gray-500 text-xs uppercase">
+          <table className="w-full text-sm bg-[#1f1710] text-amber-100 rounded-xl shadow-luxury border border-amber-200/30">
+            <thead className="bg-[#2a1f15] text-amber-200 text-xs uppercase">
               <tr>
                 <th className="px-4 py-3 text-left">Order #</th>
                 <th className="px-4 py-3 text-left">Table</th>

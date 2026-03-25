@@ -74,7 +74,7 @@ const MenuItems = () => {
     ? items?.filter((i) => i.category?._id === filterCat || i.category === filterCat)
     : items;
 
-  if (loading) return <p className="text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-amber-100">Loading...</p>;
 
   return (
     <div className="luxury-bg min-h-screen p-4 sm:p-6 text-amber-100">
@@ -88,7 +88,7 @@ const MenuItems = () => {
 
           <div className="flex gap-2">
             <select
-              className="bg-gray-50 border border-gray-300 text-black rounded-lg px-3 py-2"
+              className="input bg-[#1f1710] border border-amber-200/40 text-amber-100 rounded-lg px-3 py-2"
               value={filterCat}
               onChange={(e) => setFilterCat(e.target.value)}
             >
@@ -100,7 +100,7 @@ const MenuItems = () => {
 
             <button
               onClick={openAdd}
-              className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition"
+              className="btn-primary"
             >
               + Add Item
             </button>
@@ -109,16 +109,16 @@ const MenuItems = () => {
 
         {/* Empty */}
         {filtered?.length === 0 ? (
-          <div className="text-center py-12 text-gray-500 bg-gray-100 rounded-2xl shadow-sm">
+          <div className="text-center py-12 text-amber-100 bg-[#1f1710] rounded-2xl shadow-luxury border border-amber-200/30">
             <p className="text-4xl mb-2">🍽️</p>
             <p>No items yet.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-sm bg-gray-100/80 rounded-2xl shadow-md border border-gray-200 overflow-hidden">
+            <table className="w-full text-sm bg-[#1d1610] rounded-2xl shadow-luxury border border-amber-200/30 overflow-hidden">
               
               {/* Head */}
-              <thead className="bg-gray-200/70 text-gray-600 text-xs uppercase">
+              <thead className="bg-[#2a1f15] text-amber-200 text-xs uppercase border-b border-amber-200/20">
                 <tr>
                   <th className="px-4 py-3 text-left">Item</th>
                   <th className="px-4 py-3 text-left">Category</th>
@@ -132,7 +132,7 @@ const MenuItems = () => {
               {/* Body */}
               <tbody>
                 {filtered?.map((item) => (
-                  <tr key={item._id} className="border-t border-gray-200 hover:bg-gray-200/40 transition">
+                  <tr key={item._id} className="border-t border-amber-200/20 hover:bg-[#2a1a0f] transition text-amber-100">
                     
                     <td className="px-4 py-3 flex items-center gap-3">
                       {item.image && (
@@ -144,18 +144,18 @@ const MenuItems = () => {
                         />
                       )}
                       <div>
-                        <p className="font-medium text-gray-800">{item.name}</p>
-                        <p className="text-xs text-gray-500 truncate max-w-xs">
+                        <p className="font-bold text-amber-100">{item.name}</p>
+                        <p className="text-xs text-amber-200 truncate max-w-xs">
                           {item.description}
                         </p>
                       </div>
                     </td>
 
-                    <td className="px-4 py-3 text-gray-600">
+                    <td className="px-4 py-3 text-amber-200 font-semibold">
                       {item.category?.name || '—'}
                     </td>
 
-                    <td className="px-4 py-3 font-semibold text-gray-800">
+                    <td className="px-4 py-3 font-bold text-amber-100">
                       ₹{item.price}
                     </td>
 
@@ -174,9 +174,9 @@ const MenuItems = () => {
                         onClick={() => toggleAvail(item)}
                         className={`text-xs px-2 py-0.5 rounded-full ${
                           item.isAvailable
-                            ? 'bg-green-100/70 text-green-800'
-                            : 'bg-gray-200 text-gray-600'
-                        }`}
+                            ? 'bg-emerald-200/30 text-emerald-100 border border-emerald-200/50'
+                            : 'bg-amber-200/20 text-amber-100 border border-amber-200/50'
+                        } font-semibold`
                       >
                         {item.isAvailable ? 'Available' : 'Out of Stock'}
                       </button>
@@ -212,14 +212,14 @@ const MenuItems = () => {
         <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
           
           <input
-            className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 w-full"
+            className="bg-[#1f1710] border border-amber-200/50 text-amber-100 rounded-lg px-3 py-2 w-full"
             placeholder="Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
 
           <textarea
-            className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 w-full"
+            className="bg-[#1f1710] border border-amber-200/50 text-amber-100 rounded-lg px-3 py-2 w-full"
             rows={2}
             placeholder="Description"
             value={form.description}
@@ -229,14 +229,14 @@ const MenuItems = () => {
           <div className="grid grid-cols-2 gap-3">
             <input
               type="number"
-              className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2"
+              className="bg-[#1f1710] border border-amber-200/50 text-amber-100 rounded-lg px-3 py-2"
               placeholder="Price"
               value={form.price}
               onChange={(e) => setForm({ ...form, price: e.target.value })}
             />
 
             <select
-              className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2"
+              className="bg-[#1f1710] border border-amber-200/50 text-amber-100 rounded-lg px-3 py-2"
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
             >
@@ -249,7 +249,7 @@ const MenuItems = () => {
 
           <div className="grid grid-cols-2 gap-3">
             <select
-              className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2"
+              className="bg-[#1f1710] border border-amber-200/50 text-amber-100 rounded-lg px-3 py-2"
               value={form.foodType}
               onChange={(e) => setForm({ ...form, foodType: e.target.value })}
             >
@@ -259,7 +259,7 @@ const MenuItems = () => {
             </select>
 
             <select
-              className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2"
+              className="bg-[#1f1710] border border-amber-200/50 text-amber-100 rounded-lg px-3 py-2"
               value={form.isAvailable}
               onChange={(e) => setForm({ ...form, isAvailable: e.target.value === 'true' })}
             >
@@ -271,7 +271,7 @@ const MenuItems = () => {
           <input
             type="file"
             accept="image/*"
-            className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 w-full"
+            className="bg-[#1f1710] border border-amber-200/50 text-amber-100 rounded-lg px-3 py-2 w-full"
             onChange={(e) => setImageFile(e.target.files[0])}
           />
         </div>
