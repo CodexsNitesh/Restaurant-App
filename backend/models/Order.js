@@ -21,12 +21,21 @@ const orderSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Auto-generate order number before saving
-orderSchema.pre('save', async function (next) {
+// orderSchema.pre('save', async function (next) {
+//   if (!this.orderNumber) {
+//     const count = await mongoose.model('Order').countDocuments();
+//     this.orderNumber = `ORD-${String(count + 1).padStart(4, '0')}`;
+//   }
+//   next();
+// });
+
+orderSchema.pre('save', function (next) {
   if (!this.orderNumber) {
-    const count = await mongoose.model('Order').countDocuments();
-    this.orderNumber = `ORD-${String(count + 1).padStart(4, '0')}`;
+    const unique = Date.now().toString().slice(-6);
+    this.orderNumber = `ORD-${unique}`;
   }
   next();
 });
+
 
 module.exports = mongoose.model('Order', orderSchema);

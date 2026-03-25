@@ -8,9 +8,8 @@ import CartDrawer from '../../components/menu/CartDrawer';
 import { imgUrl } from '../../utils/helpers';
 import toast from 'react-hot-toast';
 
-// Inner component that uses CartContext
 const MenuContent = () => {
-  const { tableId } = useParams(); // e.g. "table-3"
+  const { tableId } = useParams();
   const navigate = useNavigate();
   const { cart, clearCart, itemCount, total } = useCart();
 
@@ -20,7 +19,19 @@ const MenuContent = () => {
   const [selectedCat, setSelectedCat] = useState('');
   const [search, setSearch] = useState('');
   const [cartOpen, setCartOpen] = useState(false);
-  const [tableNumber, setTableNumber] = useState(tableId ? tableId.replace(/-/g, ' ') : '');
+
+  // ✅ NEW: detect QR or normal user
+  const isQR = !!tableId;
+
+  // ❌ REMOVED editable table state
+  // const [tableNumber, setTableNumber] = useState(...);
+
+  // ✅ NEW: fixed table from URL
+  const tableNumber = tableId?.replace(/-/g, ' ');
+
+  // ✅ NEW: order type
+  const [orderType, setOrderType] = useState(isQR ? 'dine-in' : '');
+
   const [placing, setPlacing] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -42,12 +53,23 @@ const MenuContent = () => {
   });
 
   const handlePlaceOrder = async () => {
-    if (!tableNumber.trim()) return toast.error('Please enter a table number');
+    // ✅ NEW validation
+    if (!orderType) return toast.error("Select order type");
+
+    if (orderType === 'dine-in' && !tableNumber) {
+      return toast.error("Invalid table");
+    }
+
     if (cart.length === 0) return toast.error('Cart is empty');
+
     setPlacing(true);
+
     try {
       const orderData = {
-        tableNumber: tableNumber.trim(),
+        // ✅ NEW fields
+        orderType,
+        tableNumber: orderType === 'dine-in' ? tableNumber : null,
+
         items: cart.map(({ item, quantity }) => ({
           menuItem: item._id,
           name: item.name,
@@ -56,7 +78,9 @@ const MenuContent = () => {
         })),
         totalAmount: total,
       };
+
       const { data } = await placeOrder(orderData);
+
       clearCart();
       setCartOpen(false);
       navigate(`/order-success/${data.orderNumber}`);
@@ -78,7 +102,8 @@ const MenuContent = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
-      {/* Header / Banner */}
+
+      {/* Header */}
       <div className="relative bg-dark text-white">
         {settings.banner && (
           <img src={imgUrl(settings.banner)} alt="banner" className="w-full h-40 object-cover opacity-40" />
@@ -88,18 +113,37 @@ const MenuContent = () => {
             <img src={imgUrl(settings.logo)} alt="logo" className="w-16 h-16 rounded-full object-cover border-2 border-white" />
           )}
           <h1 className="text-2xl font-bold">{settings.restaurantName || 'Restaurant'}</h1>
-          {tableNumber && <p className="text-sm text-gray-300">📍 {tableNumber}</p>}
+
+          {/* ✅ UPDATED display */}
+          {orderType === 'dine-in' && tableNumber && (
+            <p className="text-sm text-gray-300">📍 {tableNumber}</p>
+          )}
+          {orderType === 'takeaway' && (
+            <p className="text-sm text-gray-300">🛍️ Takeaway</p>
+          )}
         </div>
-        {!settings.banner && (
-          <div className="py-10 flex flex-col items-center gap-2">
-            {settings.logo && (
-              <img src={imgUrl(settings.logo)} alt="logo" className="w-16 h-16 rounded-full object-cover border-2 border-white" />
-            )}
-            <h1 className="text-2xl font-bold">{settings.restaurantName || 'Restaurant'}</h1>
-            {tableNumber && <p className="text-sm text-gray-300">📍 {tableNumber}</p>}
-          </div>
-        )}
       </div>
+
+      {/* ✅ NEW: Order type selector (only if not QR) */}
+      {!isQR && (
+        <div className="p-4">
+          <p className="font-semibold mb-2">Order Type</p>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setOrderType('dine-in')}
+              className={`btn ${orderType === 'dine-in' ? 'bg-primary text-white' : ''}`}
+            >
+              Dine In
+            </button>
+            <button
+              onClick={() => setOrderType('takeaway')}
+              className={`btn ${orderType === 'takeaway' ? 'bg-primary text-white' : ''}`}
+            >
+              Takeaway
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Search */}
       <div className="sticky top-0 bg-white border-b z-10 px-4 py-3 shadow-sm">
@@ -112,10 +156,8 @@ const MenuContent = () => {
       </div>
 
       <div className="px-4 py-4 space-y-4">
-        {/* Category Filter */}
         <CategoryFilter categories={categories} selected={selectedCat} onChange={setSelectedCat} />
 
-        {/* Items */}
         {filtered.length === 0 ? (
           <div className="text-center py-16 text-gray-400">
             <p className="text-4xl mb-2">🍽️</p>
@@ -130,7 +172,7 @@ const MenuContent = () => {
         )}
       </div>
 
-      {/* Floating Cart Button */}
+      {/* Cart Button */}
       {itemCount > 0 && (
         <div className="fixed bottom-6 left-4 right-4 z-40">
           <button
@@ -144,13 +186,13 @@ const MenuContent = () => {
         </div>
       )}
 
-      {/* Cart Drawer */}
+      {/* ✅ UPDATED CartDrawer props */}
       <CartDrawer
         open={cartOpen}
         onClose={() => setCartOpen(false)}
         onPlaceOrder={handlePlaceOrder}
         tableNumber={tableNumber}
-        setTableNumber={setTableNumber}
+        orderType={orderType}   // ✅ NEW
         currency={settings.currency}
         placing={placing}
       />
@@ -158,7 +200,6 @@ const MenuContent = () => {
   );
 };
 
-// Wrap with CartProvider
 const MenuPage = () => (
   <CartProvider>
     <MenuContent />
