@@ -176,7 +176,7 @@ const MenuItems = () => {
                           item.isAvailable
                             ? 'bg-emerald-200/30 text-emerald-100 border border-emerald-200/50'
                             : 'bg-amber-200/20 text-amber-100 border border-amber-200/50'
-                        } font-semibold`
+                        } font-semibold`}
                       >
                         {item.isAvailable ? 'Available' : 'Out of Stock'}
                       </button>
@@ -259,7 +259,7 @@ const MenuItems = () => {
             </select>
 
             <select
-              className="bg-[#1f1710] border border-amber-200/50 text-amber-100 rounded-lg px-3 py-2"
+              className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2"
               value={form.isAvailable}
               onChange={(e) => setForm({ ...form, isAvailable: e.target.value === 'true' })}
             >
@@ -271,7 +271,7 @@ const MenuItems = () => {
           <input
             type="file"
             accept="image/*"
-            className="bg-[#1f1710] border border-amber-200/50 text-amber-100 rounded-lg px-3 py-2 w-full"
+            className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 w-full"
             onChange={(e) => setImageFile(e.target.files[0])}
           />
         </div>
