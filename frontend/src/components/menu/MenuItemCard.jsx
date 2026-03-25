@@ -6,12 +6,12 @@ const MenuItemCard = ({ item, currency }) => {
   const cartEntry = cart.find((c) => c.item._id === item._id);
 
   return (
-    <div className={`bg-white rounded-2xl shadow-sm border overflow-hidden flex gap-3 p-3 ${!item.isAvailable ? 'opacity-50' : ''}`}>
+    <div className={`card overflow-hidden flex gap-3 p-4 ${!item.isAvailable ? 'opacity-40' : 'hover:scale-[1.01] transition-transform'} `}>
       {item.image && (
         <img
           src={imgUrl(item.image)}
           alt={item.name}
-          className="w-24 h-24 object-cover rounded-xl flex-shrink-0"
+          className="w-24 h-24 object-cover rounded-xl flex-shrink-0 border border-amber-200/40"
           onError={(e) => { e.target.style.display = 'none'; }}
         />
       )}

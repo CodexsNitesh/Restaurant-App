@@ -101,10 +101,10 @@ const MenuContent = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-24">
+    <div className="min-h-screen pb-24 luxury-bg text-amber-100">
 
       {/* Header */}
-      <div className="relative bg-dark text-white">
+      <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(212,175,55,0.2),_rgba(22,15,9,0.95)_70%)] border-b border-amber-200/20">
         {settings.banner && (
           <img src={imgUrl(settings.banner)} alt="banner" className="w-full h-40 object-cover opacity-40" />
         )}
@@ -155,16 +155,16 @@ const MenuContent = () => {
         />
       </div>
 
-      <div className="px-4 py-4 space-y-4">
+      <div className="px-4 py-4 space-y-4 max-w-6xl mx-auto">
         <CategoryFilter categories={categories} selected={selectedCat} onChange={setSelectedCat} />
 
         {filtered.length === 0 ? (
-          <div className="text-center py-16 text-gray-400">
+          <div className="text-center py-16 text-amber-200/80">
             <p className="text-4xl mb-2">🍽️</p>
             <p>No items found</p>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((item) => (
               <MenuItemCard key={item._id} item={item} currency={settings.currency} />
             ))}

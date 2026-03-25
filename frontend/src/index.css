@@ -3,13 +3,42 @@
 @tailwind utilities;
 
 @layer base {
-  body { @apply bg-gray-50 text-gray-800; }
+  body {
+    background: radial-gradient(circle at top, #332618 0%, #130b06 35%, #090503 100%);
+    color: #f8f5ef;
+    min-height: 100vh;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  a, button, input, select, textarea {
+    font-family: inherit;
+  }
+
+  .text-primary {
+    color: #f6e8b1;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition font-medium;
+    @apply bg-primary text-secondary px-4 py-2 rounded-xl shadow-luxury hover:bg-primary-light transition-all duration-300 font-semibold;
   }
+  .btn-secondary {
+    @apply bg-secondary text-accent px-4 py-2 rounded-xl border border-amber-200/30 hover:border-amber-200 transition-all duration-300 font-medium;
+  }
+  .card {
+    @apply bg-[rgba(24,16,10,0.7)] border border-amber-100/20 rounded-2xl shadow-luxury p-4;
+  }
+  .input {
+    @apply w-full bg-[#1b140f] text-accent border border-amber-200/30 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/60 placeholder:text-amber-200/70 text-sm;
+  }
+  .label {
+    @apply block text-sm font-semibold text-amber-100/90 mb-1;
+  }
+  .luxury-bg {
+    background: linear-gradient(180deg, rgba(255,214,135,0.08), rgba(10,8,5,0.92));
+  }
+}
   .btn-secondary {
     @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition font-medium;
   }

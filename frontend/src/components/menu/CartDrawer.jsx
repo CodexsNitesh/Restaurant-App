@@ -21,9 +21,9 @@ const CartDrawer = ({
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative bg-white w-full max-w-sm flex flex-col h-full">
-        <div className="flex items-center justify-between px-4 py-4 border-b">
-          <h2 className="font-bold text-gray-800">Your Cart ({itemCount})</h2>
+      <div className="relative overflow-hidden bg-gradient-to-b from-secondary via-[#1b1610] to-secondary w-full max-w-sm flex flex-col h-full shadow-luxury">
+        <div className="flex items-center justify-between px-4 py-4 border-b border-amber-200/20">
+          <h2 className="font-bold text-amber-100">Your Cart ({itemCount})</h2>
           <button onClick={onClose} className="text-gray-400 text-xl">
             ✕
           </button>

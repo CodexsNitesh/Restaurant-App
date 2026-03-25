@@ -5,9 +5,9 @@ const OrderSuccess = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-      <div className="text-center max-w-sm">
-        <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+    <div className="min-h-screen luxury-bg flex items-center justify-center p-6">
+      <div className="text-center max-w-sm card">
+        <div className="w-24 h-24 bg-amber-200/20 border border-amber-200 rounded-full flex items-center justify-center mx-auto mb-6">
           <span className="text-5xl">✅</span>
         </div>
         <h1 className="text-2xl font-bold text-gray-800 mb-2">Order Placed!</h1>
