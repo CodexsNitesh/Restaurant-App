@@ -23,18 +23,23 @@
   .btn-primary {
     @apply bg-primary text-secondary px-4 py-2 rounded-xl shadow-luxury hover:bg-primary-light transition-all duration-300 font-semibold;
   }
+
   .btn-secondary {
     @apply bg-secondary text-accent px-4 py-2 rounded-xl border border-amber-200/30 hover:border-amber-200 transition-all duration-300 font-medium;
   }
+
   .card {
     @apply bg-[rgba(24,16,10,0.7)] border border-amber-100/20 rounded-2xl shadow-luxury p-4;
   }
+
   .input {
     @apply w-full bg-[#1b140f] text-accent border border-amber-200/30 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/60 placeholder:text-amber-200/70 text-sm;
   }
+
   .label {
     @apply block text-sm font-semibold text-amber-100/90 mb-1;
   }
+
   .luxury-bg {
     background: linear-gradient(180deg, rgba(255,214,135,0.08), rgba(10,8,5,0.92));
   }
