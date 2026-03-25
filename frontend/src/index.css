@@ -5,31 +5,62 @@
 @layer base {
   body {
     background: radial-gradient(circle at top, #332618 0%, #130b06 35%, #090503 100%);
-    color: #f8f5ef;
+    color: #fff8e7;
     min-height: 100vh;
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
+    text-rendering: optimizeLegibility;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
 
   a, button, input, select, textarea {
     font-family: inherit;
   }
 
+  h1, h2, h3, h4, h5, h6, strong, b {
+    font-weight: 700;
+    color: #FBE8A6;
+    letter-spacing: 0.02em;
+  }
+
+  p, span, li, label {
+    color: #fffbeb;
+    font-weight: 600;
+  }
+
   .text-primary {
     color: #f6e8b1;
+    font-weight: 700;
+  }
+
+  .text-highlight {
+    color: #ffd164;
+    text-shadow: 0 0 6px rgba(255, 209, 96, 0.6);
+  }
+
+  .border-strong {
+    border-color: rgba(255, 209, 96, 0.35);
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary text-secondary px-4 py-2 rounded-xl shadow-luxury hover:bg-primary-light transition-all duration-300 font-semibold;
+    @apply bg-primary text-secondary px-4 py-2 rounded-xl shadow-luxury hover:bg-primary-light transition-all duration-300 font-bold tracking-wide text-lg;
+    border: 1px solid rgba(255, 209, 96, 0.4);
   }
 
   .btn-secondary {
-    @apply bg-secondary text-accent px-4 py-2 rounded-xl border border-amber-200/30 hover:border-amber-200 transition-all duration-300 font-medium;
+    @apply bg-secondary text-accent px-4 py-2 rounded-xl border border-amber-200/30 hover:border-amber-200 transition-all duration-300 font-semibold tracking-wide;
+    box-shadow: inset 0 0 0 1px rgba(255, 209, 96, 0.35);
   }
 
   .card {
     @apply bg-[rgba(24,16,10,0.7)] border border-amber-100/20 rounded-2xl shadow-luxury p-4;
+    border: 1px solid rgba(255, 209, 96, 0.2);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
   }
 
   .input {

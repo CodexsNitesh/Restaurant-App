@@ -77,12 +77,12 @@ const MenuItems = () => {
   if (loading) return <p className="text-gray-500">Loading...</p>;
 
   return (
-    <div className="bg-gray-50 min-h-screen p-6">
-      <div className="bg-gray-100 p-6 rounded-2xl shadow-sm">
+    <div className="luxury-bg min-h-screen p-4 sm:p-6 text-amber-100">
+      <div className="card p-6 rounded-2xl border-strong">
 
         {/* Header */}
         <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
-          <h2 className="text-xl font-semibold text-gray-800">
+          <h2 className="text-xl sm:text-2xl font-bold text-amber-100 tracking-tight">
             Menu Items ({filtered?.length || 0})
           </h2>
 
