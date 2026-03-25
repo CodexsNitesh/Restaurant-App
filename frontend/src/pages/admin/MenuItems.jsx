@@ -88,7 +88,7 @@ const MenuItems = () => {
 
           <div className="flex gap-2">
             <select
-              className="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2"
+              className="bg-gray-50 border border-gray-300 text-black rounded-lg px-3 py-2"
               value={filterCat}
               onChange={(e) => setFilterCat(e.target.value)}
             >
