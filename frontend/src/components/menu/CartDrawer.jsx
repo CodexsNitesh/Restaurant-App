@@ -68,27 +68,35 @@
 
 // export default CartDrawer;
 
-
-
-
-import { useCart } from '../../context/CartContext';
-import { formatCurrency } from '../../utils/helpers';
+import { useCart } from "../../context/CartContext";
+import { formatCurrency } from "../../utils/helpers";
 
 // ❌ REMOVED setTableNumber
 // ✅ ADDED orderType
-const CartDrawer = ({ open, onClose, onPlaceOrder, tableNumber, orderType, currency, placing }) => {
+const CartDrawer = ({
+  open,
+  onClose,
+  onPlaceOrder,
+  tableNumber,
+  orderType,
+  currency,
+  placing,
+}) => {
   const { cart, addToCart, removeFromCart, total, itemCount } = useCart();
 
   if (!open) return null;
+
+  const isDineInWithoutTable = orderType === "dine-in" && !tableNumber;
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
       <div className="relative bg-white w-full max-w-sm flex flex-col h-full">
-
         <div className="flex items-center justify-between px-4 py-4 border-b">
           <h2 className="font-bold text-gray-800">Your Cart ({itemCount})</h2>
-          <button onClick={onClose} className="text-gray-400 text-xl">✕</button>
+          <button onClick={onClose} className="text-gray-400 text-xl">
+            ✕
+          </button>
         </div>
 
         {cart.length === 0 ? (
@@ -136,7 +144,6 @@ const CartDrawer = ({ open, onClose, onPlaceOrder, tableNumber, orderType, curre
         )}
 
         <div className="border-t p-4 space-y-3">
-
           {/* Total */}
           <div className="flex justify-between font-bold text-gray-800">
             <span>Total</span>
@@ -157,15 +164,19 @@ const CartDrawer = ({ open, onClose, onPlaceOrder, tableNumber, orderType, curre
           */}
 
           {/* ✅ NEW: Display only (no editing) */}
-          {orderType === 'dine-in' && tableNumber && (
+          {orderType === "dine-in" && tableNumber && (
             <div className="text-sm text-gray-600">
               📍 Table: <span className="font-semibold">{tableNumber}</span>
             </div>
           )}
 
-          {orderType === 'takeaway' && (
-            <div className="text-sm text-gray-600">
-              🛍️ Takeaway Order
+          {orderType === "takeaway" && (
+            <div className="text-sm text-gray-600">🛍️ Takeaway Order</div>
+          )}
+
+          {isDineInWithoutTable && (
+            <div className="text-sm text-red-500">
+              ⚠️ Please scan the QR on your table to place a dine-in order
             </div>
           )}
 
@@ -173,12 +184,12 @@ const CartDrawer = ({ open, onClose, onPlaceOrder, tableNumber, orderType, curre
           <button
             onClick={onPlaceOrder}
             // ❌ REMOVED tableNumber dependency
-            disabled={cart.length === 0 || !orderType || placing}
+            // disabled={cart.length === 0 || !orderType || placing}
+            disabled={cart.length === 0 || !orderType || placing || isDineInWithoutTable}
             className="w-full btn-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {placing ? 'Placing Order...' : 'Place Order'}
+            {placing ? "Placing Order..." : "Place Order"}
           </button>
-
         </div>
       </div>
     </div>
@@ -186,8 +197,6 @@ const CartDrawer = ({ open, onClose, onPlaceOrder, tableNumber, orderType, curre
 };
 
 export default CartDrawer;
-
-
 
 // import { useState, useEffect } from 'react';
 // import { useParams, useNavigate } from 'react-router-dom';
